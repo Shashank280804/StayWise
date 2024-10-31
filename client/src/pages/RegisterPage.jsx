@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Register.scss";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import {useNavigate} from "react-router-dom"
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -11,20 +12,49 @@ const RegisterPage = () => {
     profileImage: null,
   });
 
-  const handleChange=(e)=>{
-    const {name,value,files}=e.target;
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-      [name]: name === "profileImage"? files[0] : value
-    })
+      [name]: name === "profileImage" ? files[0] : value,
+    });
+  };
+  console.log(formData);
+
+  const [passwordMatch, setPasswordMatch] = useState(true);
+
+  useEffect(()=>{
+    setPasswordMatch(formData.password===formData.confirmPassword || formData.confirmPassword==="")
+  })
+  const navigate= useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+   
+    try{
+      const register_form= new FormData()
+      for(var key in formData){
+        register_form.append(key,formData[key])
+      }
+
+      const response= await fetch("http://localhost:3001/auth/register",{
+        method:"POST",
+        body: register_form
+      })
+
+      if(response.ok){
+        navigate("/login")
+      }
+    }catch(err){
+      console.log("Registration failed",err.message)
+    }
   }
-console.log(formData);
 
   return (
     <div className="register">
       <div className="register_content">
-        <form className="register_content_form">
+        <form className="register_content_form" onSubmit={handleSubmit}>
           <input
             placeholder="First Name"
             name="firstName"
@@ -63,6 +93,10 @@ console.log(formData);
             type="password"
             required
           />
+
+          {!passwordMatch && (
+            <p style={{color:"red"}}>Passwords are not matched</p>
+          )}
           <input
             id="image"
             type="file"
@@ -78,12 +112,13 @@ console.log(formData);
           </label>
 
           {formData.profileImage && (
-              <img src={URL.createObjectURL(formData.profileImage)} 
+            <img
+              src={URL.createObjectURL(formData.profileImage)}
               alt="profile"
-              style={{ maxWidth:"80px" }}
-              />
+              style={{ maxWidth: "80px" }}
+            />
           )}
-          <button type="submit">REGISTER</button>
+          <button type="submit" disabled={!passwordMatch}>REGISTER</button>
         </form>
         <a href="/login">Already Have an account? Log in</a>
       </div>
