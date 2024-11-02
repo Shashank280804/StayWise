@@ -1,9 +1,10 @@
 import React from "react";
 import "../styles/CreateListing.scss";
 import Navbar from "../components/Navbar";
-import { categories, types } from "../data";
+import { categories, types,facilities } from "../data";
 import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
 import variables from "../styles/variables.scss";
+
 
 const CreateListing = () => {
   return (
@@ -26,7 +27,7 @@ const CreateListing = () => {
             </div>
 
             <h3>What type of place will guests have?</h3>
-            <div className="type_list">
+            <div className="type-list">
               {types?.map((item, index) => (
                 <div className="type" key={index}>
                   <div className="type_text">
@@ -175,6 +176,24 @@ const CreateListing = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="create-listing_step2">
+            <h2>Step2: Make your place stand out</h2>
+            <hr />
+
+            <h3>Tell guests what your place has to offer</h3>
+            <div className="amenities">
+              {facilities?.map((item,index)=>(
+                <div className="facility" key={index}>
+                <div className="facility_icon">{item.icon}</div>
+                <p>{item.name}</p>
+              </div>
+              ))}
+            </div>
+
+            <h3> Add some photos of your place</h3>
+            
           </div>
         </form>
       </div>
