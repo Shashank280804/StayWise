@@ -8,6 +8,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosImages } from "react-icons/io";
 import { BiTrash } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
   const [category, setCategory] = useState("");
@@ -71,7 +72,9 @@ const CreateListing = () => {
     });
   };
 
+  
   const creatorId = useSelector((state) => state.user._id);
+  const navigate = useNavigate();
   const handlePost = async (e) => {
     e.preventDefault();
     try {
@@ -89,12 +92,28 @@ const CreateListing = () => {
       listingForm.append("bedCount",bedCount);
       listingForm.append("bathroomCount",bathroomCount);
       listingForm.append("amenities",amenities);
-      listingForm.append("city",formLocation.city);
-      listingForm.append("city",formLocation.city);
+      listingForm.append("title",formDescription.title);
+      listingForm.append("description",formDescription.description);
+      listingForm.append("highlight",formDescription.highlight);
+      listingForm.append("highlightDesc",formDescription.highlightDesc);
+      listingForm.append("price",formDescription.price);
 
+    photos.forEach((photo)=>{
+      listingForm.append("listingPhotos",photo)
+    })
 
+    const response = await fetch("http://localhost:3001/properties/create",{
+      method:"POST",
+      body:listingForm
+    })
 
-    } catch (err) {}
+    if(response.ok){
+      navigate("/")
+    }
+    } catch (err) {
+      console.log("Publish Listing failed",err.message)
+      
+    }
   };
 
   const handleSelectAmenities = (facility) => {
@@ -112,7 +131,7 @@ const CreateListing = () => {
       <Navbar />
       <div className="create-listing">
         <h1>Publish Your Place</h1>
-        <form>
+        <form onSubmit={handlePost}>
           <div className="create-listing_step1">
             <h2>Step1: Tell us about your place</h2>
             <hr />
