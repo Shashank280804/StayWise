@@ -38,7 +38,7 @@ const RegisterPage = () => {
         register_form.append(key,formData[key])
       }
 
-      const response= await fetch("http://localhost:3001/auth/register",{
+      const response= await fetch(`${Backend_Url}/auth/register`,{
         method:"POST",
         body: register_form
       })

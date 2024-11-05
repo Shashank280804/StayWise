@@ -17,8 +17,8 @@ const Listings = () => {
     try {
       const response = await fetch(
         selectedcategory !== "All"
-          ? `http://localhost:3001/properties?category=${selectedcategory}`
-          : "http://localhost:3001/properties",
+          ? `${Backend_Url}/properties?category=${selectedcategory}`
+          : `${Backend_Url}/properties`,
         {
           method: "GET",
         }

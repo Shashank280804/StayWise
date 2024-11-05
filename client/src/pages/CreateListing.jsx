@@ -103,7 +103,7 @@ const CreateListing = () => {
       listingForm.append("listingPhotos",photo)
     })
 
-    const response = await fetch("http://localhost:3001/properties/create",{
+    const response = await fetch(`${Backend_Url}/properties/create`,{
       method:"POST",
       body:listingForm
     })
