@@ -36,14 +36,14 @@ const Listings = () => {
     getFeedListings();
   }, [selectedcategory]);
 
-  console.log(listings);
+ 
 
   return (
     <>
       <div className="category-list">
         {categories?.map((category, index) => (
           <div
-            className={`category`}
+            className={`category ${category.label===selectedcategory?"selected":""}`}
             key={index}
             onClick={() => setSelectedCategory(category.label)}
           >
@@ -67,9 +67,11 @@ const Listings = () => {
               country,
               category,
               type,
-              price
+              price,
+              booking=false
 }) => (
               <ListingCard
+              key={_id}
               listingId={_id}
               creator={creator}
               listingPhotoPaths={listingPhotoPaths}
@@ -79,6 +81,7 @@ const Listings = () => {
               category={category}
               type={type}
               price={price}
+              booking={booking}
               />
             )
           )}
