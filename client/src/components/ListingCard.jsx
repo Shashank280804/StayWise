@@ -8,6 +8,7 @@ import {
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setWishList } from "../redux/state";
+import { Backend_Url } from '../utils/constant';
 
 const ListingCard = ({
   listingId,
@@ -47,21 +48,21 @@ const ListingCard = ({
 
   const patchWishList = async () => {
     //check here user for error and condition
-    if( user?._id !== creator._id){
-    const response = await fetch(
-      `${Backend_Url}/users/${user?._id}/${listingId}`,
-      {
-        method: "PATCH",
-        header: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    dispatch(setWishList(data.wishList));
-    
+    if (user?._id !== creator._id) {
+      const response = await fetch(
+        `${Backend_Url}/users/${user?._id}/${listingId}`,
+        {
+          method: "PATCH",
+          header: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      dispatch(setWishList(data.wishList));
+
     }
-    else{
+    else {
       return;
     }
   };

@@ -7,6 +7,7 @@ import ListingCard from "../components/ListingCard";
 import { setListings } from "../redux/state";
 import Loader from "../components/Loader";
 import Footer from "../components/Footer";
+import { Backend_Url } from '../utils/constant';
 
 const SearchPage = () => {
   const [loading, setLoading] = useState(true);
@@ -24,17 +25,17 @@ const SearchPage = () => {
       );
 
       const data = await response.json();
-      dispatch(setListings({listings:data}));
+      dispatch(setListings({ listings: data }));
       setLoading(false);
     } catch (err) {
-        console.log("Fetch Search List Failed",err.message);
-        
+      console.log("Fetch Search List Failed", err.message);
+
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getSearchListings()
-  },[search])
+  }, [search])
 
   return loading ? (
     <Loader />
@@ -71,7 +72,7 @@ const SearchPage = () => {
           )
         )}
       </div>
-      <Footer />  
+      <Footer />
     </>
   );
 };

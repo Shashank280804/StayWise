@@ -2,6 +2,8 @@ import React from "react";
 import "../styles/Register.scss";
 import { useState,useEffect } from "react";
 import {useNavigate} from "react-router-dom"
+import { Backend_Url } from '../utils/constant';
+
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     firstName: "",

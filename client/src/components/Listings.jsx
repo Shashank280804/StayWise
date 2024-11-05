@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setListings } from "../redux/state";
 import Loader from "./Loader";
 import ListingCard from "./ListingCard";
+import { Backend_Url } from '../utils/constant';
 
 const Listings = () => {
   const dispatch = useDispatch();

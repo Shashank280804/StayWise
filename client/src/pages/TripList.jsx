@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTripList } from "../redux/state";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
+import { Backend_Url } from '../utils/constant';
 
 const TripList = () => {
   const [loading, setLoading] = useState(true);

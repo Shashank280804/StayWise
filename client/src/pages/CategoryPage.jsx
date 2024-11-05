@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setListings } from "../redux/state";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
+import { Backend_Url } from '../utils/constant';
 
 const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
