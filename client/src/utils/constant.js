@@ -1,1 +1,1 @@
-export const Backend_Url ="https://staywise-mfu0.onrender.com"
+export const Backend_Url = "http://localhost:3001";
