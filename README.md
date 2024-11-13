@@ -1,14 +1,11 @@
 
 # StayWise
 
+#Implementation
+https://drive.google.com/file/d/1skH4DajeisiGFohZ9Zu2HgauYC-w4Ijq/view?usp=sharing
+
+# Overview
 A dynamic RESTful API for managing a booking platform where users can register, create listings, make bookings, and manage their wish lists. This platform allows hosts to list properties, and guests to browse, view, and book available listings.
-
-
-## Deployment
-**Go to upper right corner first signup and login and then proceed to dashboard:**  
-
-https://staywise-client.onrender.com
-
 
 ## Features
 
